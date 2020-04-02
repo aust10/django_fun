@@ -1,0 +1,13 @@
+<p>hello world</p>
+
+{% if latest_lists_item %}
+    <ul>
+    {% for list_item in latest_lists_item %}
+        <li>{{ list_item.item}}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>There is nothing in this list</p>
+{% endif %}
+<input type="text" id="list_item">
+<input type="submit" value="Add to List!" id="list_item">
