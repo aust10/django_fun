@@ -8,33 +8,31 @@ from .models import ListItem
 
 
 
-class IndexView(generic.ListView):
-    template_name= 'lists_app/index.html'
-    context_object_name ='latest_lists_items'
+def index(request):
+    context = {
+        'latest_lists_items':ListItem.objects.filter(is_comp=False).order_by('pub_date'),
+        'finnished_lists_items':ListItem.objects.filter(is_comp=True).order_by('comp_date')
+    }
+    return render(request, "lists_app/index.html", context)
 
-    def get_queryset(self):
-        return ListItem.objects.filter(comp_date=timezone.now())
-         
-     
-     
 def add_it(request):
     entry = request.POST['list_entry']
-    ListItem.create(items=entry, pub_date=timezone.now())
-    return HttpResponseRedirect(reverse('list_app:index'))
+    ListItem.objects.create(items=entry, pub_date=timezone.now())
+    return HttpResponseRedirect(reverse('lists_app:index'))
 
-def to_compleated(request):
-    completed = get_object_or_404(ListItme, pk=completed_id)
+def to_compleated(request, completed_id):
+    completed = get_object_or_404(ListItem, pk=completed_id)
     completed.is_comp = True
     completed.comp_date = timezone.now()
     completed.save()
 
-    return HttpResponseRedirect
+    return HttpResponseRedirect(reverse('lists_app:index'))
 
 def delete_it(request):
     delete_item = ListItem.objects.filter(is_comp=True)
 
     for items in delete_item:
         items.delete()
-    return HttpResponseRedirect(reverse('list_app:index'))
+    return HttpResponseRedirect(reverse('lists_app:index'))
 
 
