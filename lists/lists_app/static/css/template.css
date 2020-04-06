@@ -1,0 +1,22 @@
+html {
+    background:blanchedalmond;
+   }
+
+a {
+    color: black;
+}
+#list_entry{
+    border-radius: 10px;
+    /* opacity: .5; */
+    color: rgb(129, 117, 117);
+    padding: 4px 10px 4px 10px;
+ 
+}
+/* syle for layout */
+
+#lists{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+

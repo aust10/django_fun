@@ -1,39 +1,46 @@
+<html>
+    <link rel="stylesheet" href="/static/css/template.css">
+    <div id="lists">
+        <div id="uncompleate">
+            <h2>Chore List</h2>
+            <hr size="2" color="black">
+            {% if latest_lists_items %}
+                <ul>
+                {% for list_item in latest_lists_items %}
+                    <li>{{ list_item.items}}</li>
+                    <p><em><a class="complete" href="{% url 'lists_app:to_compleated' list_item.id %}">Tap when complete</a></em></p>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>There is nothing in this list</p>
+            {% endif %}
+            <div id="add">
+                <form action="{% url 'lists_app:add_it' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" id="list_entry" name="list_entry">
+                    <input type="submit" value="Add to List!" id="list_entry">
+                </form>
+            </div>
+        </div>
+        <div id="compleated">
+            <h2>Finnished List</h2>
+            <hr size="2" color="black">
+            {% if finnished_lists_items %}
+                <p>List item | Completed Date</p>
 
-<div id="uncompleate">
-    <h2>Chore List</h2>
-    <hr>
-    {% if latest_lists_items %}
-        <ul>
-        {% for list_item in latest_lists_items %}
-            <li>{{ list_item.items}}</li>
-            <p><a class="complete" href="{% url 'lists_app:to_compleated' list_item.id %}">Tap when complete</a></p>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>There is nothing in this list</p>
-    {% endif %}
-</div>
-<div id="add">
-    <form action="{% url 'lists_app:add_it' %}" method="post">
-        {% csrf_token %}
-        <input type="text" id="list_entry" name="list_entry">
-        <input type="submit" value="Add to List!" id="list_entry">
-    </form>
-</div>
-<div id="compleated">
-    <h2>Finnished List</h2>
-    <hr>
-    {% if finnished_lists_items %}
-        <p>List item | Completed Date</p>
-         
-        <ul>
-        {% for list_entry in finnished_lists_items %}
-            <li>{{ list_entry.items }} -- {{list_entry.comp_date}}</li>
-        {% endfor %}
-        </ul>
-        <form action="{% url 'lists_app:delete_it' %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Delete Item" id="list_entry">
-        </form>
-    {% endif %}
-</div>
+                <ul>
+                {% for list_entry in finnished_lists_items %}
+                    <li>{{ list_entry.items }} -- {{list_entry.comp_date}}</li>
+                {% endfor %}
+                </ul>
+                <form action="{% url 'lists_app:delete_it' %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete Items" id="list_entry">
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</html>
+<style scoped>
+
+</style>
