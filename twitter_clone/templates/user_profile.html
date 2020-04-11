@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{{object.username}}</h2>
+    {% for item in object.twitter_set.all  %}
+        {% if user.is_authenticated %}
+            <div id="authenticated-user">
+                <a href="{% url 'twitter_app:twitter_app_detail' twitter.id %}">{{ twitter.title }}</a>
+            </div>       
+        {% endif %}
+    {% endfor %}
+{% endblock content %}

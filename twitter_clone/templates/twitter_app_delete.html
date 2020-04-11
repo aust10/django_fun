@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to DELETE?<br>{{ twitter.title }}</p>
+        <input type="submit" id="detail-btn" value="Delete">
+        <a href="{% url 'twitter_app:home_page' %}">Home Page</a>
+    </form>
+{% endblock content %}
+    

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div id="home-tweets">
+        {% for item in object_list %}
+           
+            <div id="entry">
+            
+                <h2><a href="{% url 'twitter_app:detail' item.id %}">{{ item.title }}</a></h2>
+                <p>Author: <em><a href="{% url 'user:profile' item.author.username %}">{{ item.author.username }}</em></a><img id="post-img" src="{{ item.my_img.url }}"></img></p>
+            
+            </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id="detail-btns">
+        <a href="{% url 'twitter_app:home_page' %}">Return Home</a>
+        <a href="{% url 'twitter_app:delete' twitter.pk %}">Delete</a>
+    <div>
+       
+    <div id="detail_page">
+        <div id="detail-header">
+            <h2>{{ twitter.title }}</h2>
+            <p>{{ twitter.body_text }}</p>
+        </div>
+        <img id="detail-img" src="{{ twitter.my_img.url }}"></img>
+    </div>
+    <div id="btns">
+       
+
+    </div>
+{% endblock content %}
